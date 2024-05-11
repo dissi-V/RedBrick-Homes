@@ -1,0 +1,16 @@
+package com.example.redbrickhomes.navigation
+
+const val HOME_URL = "home"
+const val SIGNUP_URL = "signup"
+const val LOGIN_URL = "login"
+const val ADD_PROPERTY_URL = "add_property"
+const val VIEW_PROPERTY_URL = "view_property"
+const val SPLASH_URL = "splash"
+const val HOUSE1_URL = "house1"
+const val HOUSE2_URL = "house2"
+const val HOUSE3_URL = "house3"
+const val HOUSE4_URL = "house4"
+const val APARTMENT1_URL = "apartment1"
+const val APARTMENT2_URL = "apartment2"
+const val APARTMENT3_URL = "apartment3"
+const val APARTMENT4_URL = "apartment4"

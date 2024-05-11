@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1063755993599",
+    "project_id": "redbricks-84967",
+    "storage_bucket": "redbricks-84967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063755993599:android:e2bbc5156769d4a3d157ca",
+        "android_client_info": {
+          "package_name": "com.example.redbrickhomes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg9O7gPLCI7ZL6cX74P3DYuNsxYISP7HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
