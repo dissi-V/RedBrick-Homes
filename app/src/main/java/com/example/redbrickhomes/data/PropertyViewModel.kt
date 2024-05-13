@@ -7,17 +7,17 @@ import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.navigation.NavHostController
-import com.example.redbrickhomes.models.Property
 import com.example.redbrickhomes.navigation.LOGIN_URL
+import com.example.redbrickhomes.models.Property
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
-class PropertyViewModel (var navController: NavHostController, var context: Context) {
+class PropertyViewModel(var navController:NavHostController, var context: Context) {
     var authViewModel:AuthViewModel
-    var progress: ProgressDialog
+    var progress:ProgressDialog
     init {
         authViewModel = AuthViewModel(navController, context)
         if (!authViewModel.isLoggedIn()){
@@ -28,10 +28,10 @@ class PropertyViewModel (var navController: NavHostController, var context: Cont
         progress.setMessage("Please wait...")
     }
 
-    fun uploadProperty(name:String, location:String, price:String, filePath: Uri){
+    fun uploadProperty(name:String, location:String, price:String, filePath:Uri){
         val propertyId = System.currentTimeMillis().toString()
         val storageRef = FirebaseStorage.getInstance().getReference()
-            .child("property/$propertyId")
+                                .child("Propertys/$propertyId")
         progress.show()
         storageRef.putFile(filePath).addOnCompleteListener{
             progress.dismiss()
@@ -41,7 +41,7 @@ class PropertyViewModel (var navController: NavHostController, var context: Cont
                     var imageUrl = it.toString()
                     var property = Property(name,location,price,imageUrl,propertyId)
                     var databaseRef = FirebaseDatabase.getInstance().getReference()
-                        .child("property/$propertyId")
+                        .child("Propertys/$propertyId")
                     databaseRef.setValue(property).addOnCompleteListener {
                         if (it.isSuccessful){
                             Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
@@ -57,18 +57,18 @@ class PropertyViewModel (var navController: NavHostController, var context: Cont
     }
 
     fun allProperty(
-        property : MutableState<Property>,
-        properties: SnapshotStateList<Property>): SnapshotStateList<Property> {
+        property:MutableState<Property>,
+        propertys:SnapshotStateList<Property>):SnapshotStateList<Property>{
         progress.show()
         var ref = FirebaseDatabase.getInstance().getReference()
-            .child("property")
-        ref.addValueEventListener(object: ValueEventListener {
+                    .child("Propertys")
+        ref.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                properties.clear()
+                propertys.clear()
                 for (snap in snapshot.children){
                     var retrievedProperty = snap.getValue(Property::class.java)
                     property.value = retrievedProperty!!
-                    properties.add(retrievedProperty)
+                    propertys.add(retrievedProperty)
                 }
                 progress.dismiss()
             }
@@ -77,12 +77,12 @@ class PropertyViewModel (var navController: NavHostController, var context: Cont
                 Toast.makeText(context, "DB locked", Toast.LENGTH_SHORT).show()
             }
         })
-        return properties
+        return propertys
     }
 
     fun deleteProperty(propertyId:String){
         var ref = FirebaseDatabase.getInstance().getReference()
-            .child("property/$propertyId")
+                            .child("Property/$propertyId")
         ref.removeValue()
         Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
     }

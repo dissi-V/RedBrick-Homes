@@ -20,6 +20,7 @@ import com.example.redbrickhomes.ui.theme.screens.products.AddPropertyScreen
 import com.example.redbrickhomes.ui.theme.screens.products.ViewPropertyScreen
 import com.example.redbrickhomes.ui.theme.screens.signup.SignupScreen
 import com.example.redbrickhomes.ui.theme.screens.splash.SplashScreen
+import com.example.redbrickhomes.ui.theme.screens.upload.UploadScreen
 
 @Composable
 fun AppNavHost(
@@ -72,6 +73,9 @@ fun AppNavHost(
         }
         composable(APARTMENT4_URL){
             Apartment4Screen(navController = navController)
+        }
+        composable(UPLOAD_URL){
+            UploadScreen(navController = navController)
         }
 
     }

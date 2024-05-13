@@ -6,10 +6,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -33,6 +38,7 @@ import com.example.redbrickhomes.R
 import com.example.redbrickhomes.data.PropertyViewModel
 import com.example.redbrickhomes.models.Property
 import com.example.redbrickhomes.navigation.ADD_PROPERTY_URL
+import com.example.redbrickhomes.ui.theme.Redd
 import com.example.redbrickhomes.ui.theme.WazitoECommerceTheme
 
 @Composable
@@ -47,9 +53,9 @@ fun ViewPropertyScreen(navController:NavHostController) {
 
 
         val emptyPropertyState = remember { mutableStateOf(Property("","","","","")) }
-        var emptyPropertiesListState = remember { mutableStateListOf<Property>() }
+        var emptyPropertysListState = remember { mutableStateListOf<Property>() }
 
-        var properties = propertyRepository.allProperty(emptyPropertyState, emptyPropertiesListState)
+        var propertys = propertyRepository.allProperty(emptyPropertyState, emptyPropertysListState)
 
 
         Column(
@@ -57,7 +63,7 @@ fun ViewPropertyScreen(navController:NavHostController) {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "All products",
+            Text(text = "Uploaded Premises",
                 fontSize = 30.sp,
                 fontFamily = FontFamily.Cursive,
                 color = Color.Red)
@@ -65,7 +71,7 @@ fun ViewPropertyScreen(navController:NavHostController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             LazyColumn(){
-                items(properties){
+                items(propertys){
                     PropertyItem(
                         name = it.name,
                         location = it.location,
@@ -87,19 +93,47 @@ fun PropertyItem(name:String, location:String, price:String, id:String,
                 navController:NavHostController,
                 propertyRepository:PropertyViewModel, propertyImage:String) {
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Image(
-            painter = rememberAsyncImagePainter(propertyImage),
-            contentDescription = null,
-            modifier = Modifier.size(250.dp)
-        )
-        Text(text = name)
-        Text(text = location)
-        Text(text = price)
+    Column(modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        var mContext = LocalContext.current
+
+
+        Card(modifier = Modifier
+            .height(320.dp)
+            .width(300.dp)
+            .padding(bottom = 10.dp)) {
+
+
+            Image(
+                painter = rememberAsyncImagePainter(propertyImage),
+                contentDescription = null,
+                modifier = Modifier.size(250.dp)
+            )
+            Text(text = name,
+                fontSize = 15.sp,
+                fontFamily = FontFamily.Serif,
+                color = Color.Black
+            )
+
+            Text(text = location,
+                fontSize = 15.sp,
+                fontFamily = FontFamily.Serif,
+                color = Color.Black
+            )
+
+            Text(text = price,
+                fontSize = 15.sp,
+                fontFamily = FontFamily.Serif,
+                color = Color.Black
+            )
+        }
 
         Button(onClick = {
             propertyRepository.deleteProperty(id)
-        }) {
+        },
+          shape = RoundedCornerShape(topStart = 10.dp),
+            colors = ButtonDefaults.buttonColors(Redd)
+        ) {
             Text(text = "Delete")
         }
         Button(onClick = {

@@ -19,9 +19,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,9 +42,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,6 +53,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.redbrickhomes.R
 import com.example.redbrickhomes.data.PropertyViewModel
 import com.example.redbrickhomes.navigation.HOME_URL
+import com.example.redbrickhomes.navigation.UPLOAD_URL
 import com.example.redbrickhomes.navigation.VIEW_PROPERTY_URL
 import com.example.redbrickhomes.ui.theme.Redd
 import com.example.redbrickhomes.ui.theme.WazitoECommerceTheme
@@ -74,7 +72,8 @@ fun AddPropertyScreen(navController:NavHostController){
         TopAppBar(
             title = {
                 Text(
-                    text = "Red Brick Homes"
+                    text = "RedBrick Homes",
+                    fontWeight = FontWeight.Bold
         ) },
             colors = TopAppBarDefaults.mediumTopAppBarColors(Redd),
             navigationIcon = {
@@ -99,7 +98,6 @@ fun AddPropertyScreen(navController:NavHostController){
         Text(
             text = "Add Property",
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Serif
         )
 
@@ -189,7 +187,7 @@ fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: N
 
             Button(onClick = {
                 //-----------WRITE THE UPLOAD LOGIC HERE---------------//
-                var propertyRepository = PropertyViewModel(navController,context)
+                val propertyRepository = PropertyViewModel(navController,context)
                 propertyRepository.uploadProperty(name, location, price,imageUri!!)
                              },
                 colors = ButtonDefaults.buttonColors(Redd),
@@ -203,7 +201,8 @@ fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: N
 
             Text(
                 text = "View Apartments",
-                modifier = Modifier.clickable { navController.navigate(VIEW_PROPERTY_URL) },
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable { navController.navigate(UPLOAD_URL) },
             )
 
 

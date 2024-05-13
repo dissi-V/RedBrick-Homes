@@ -48,7 +48,7 @@ fun SplashScreen(navController: NavHostController){
             modifier = Modifier.size(200.dp))
 
         Text(
-            text = "Red Brick Homes",
+            text = "RedBrick Homes",
             fontSize = 35.sp,
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.ExtraBold,

@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -41,6 +42,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.redbrickhomes.R
 import com.example.redbrickhomes.data.AuthViewModel
 import com.example.redbrickhomes.navigation.LOGIN_URL
+import com.example.redbrickhomes.ui.theme.Redd
 import com.example.redbrickhomes.ui.theme.WazitoECommerceTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -113,6 +115,7 @@ fun SignupScreen(navController:NavHostController){
             onClick = {
             authViewModel.signup(name, email, password)
         },
+            colors = ButtonDefaults.buttonColors(Redd),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
